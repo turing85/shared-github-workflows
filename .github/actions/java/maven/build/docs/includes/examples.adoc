@@ -1,0 +1,7 @@
+= Examples
+
+For example usages, please see:
+
+* link:.github/actions/java/maven/quarkus/single-module/build-and-test-jvm/action.yml[`.github/actions/java/maven/quarkus/single-module/build-and-test-jvm/action.yml`],
+* link:.github/actions/java/maven/quarkus/single-module/build-and-test-native/action.yml[`.github/actions/java/maven/quarkus/single-module/build-and-test-native/action.yml`], and
+* link:.github/actions/java/maven/owasp-scan/action.yml[`.github/actions/java/maven/owasp-scan/action.yml`]

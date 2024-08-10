@@ -1,0 +1,73 @@
+name: Maven Compile
+
+description: An action to compile an application with Maven
+
+inputs:
+  graalvm-distribution:
+    description: The GraalVM distribution to use.
+    default: mandrel
+    required: true
+  graalvm-version:
+    description: The GraalVM distribution version to use.
+    default: mandrel-23.1.2.0-Final
+    required: true
+  java-version:
+    description: The Java version of the GraalVM distribution.
+    default: '21'
+    required: true
+
+  maven-opts:
+    description: Options passed to the maven command.
+    default: >-
+      --batch-mode
+      --color always
+    required: true
+
+  artifact-retention-days:
+    description: Duration in days after which the artifacts will expire.
+    default: '2'
+    required: true
+  compiled-classes-artifact-name:
+    description: The name for the artifact holding all compiled classes.
+    default: compiled-classes
+    required: true
+  maven-state-artifact-name:
+    description: The name for the artifact holding the maven state.
+    default: maven-state
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Maven compile
+      id: maven-compile
+      uses: ./shared-github-workflows/.github/actions/java/maven/build
+      with:
+        maven-opts: >-
+          --define dataDirectory=owasp-db
+          --define nvdApiKey=${{ inputs.nvd-api-key }}
+          ${{ inputs.maven-opts }}
+        maven-targets: >-
+          compile
+          test-compile
+
+    - name: Upload Maven State
+      id: upload-maven-state
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        if-no-files-found: error
+        name: ${{ inputs.maven-state-artifact-name }}
+        path: '**/target/maven-*'
+        retention-days: ${{ inputs.artifact-retention-days }}
+
+    - name: Upload Compiled Classes
+      id: upload-compiled-classes
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        if-no-files-found: error
+        name: ${{ inputs.compiled-classes-artifact-name }}
+        path: '**/target/*classes'
+        retention-days: ${{ inputs.artifact-retention-days }}

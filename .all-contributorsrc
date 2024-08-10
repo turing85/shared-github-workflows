@@ -1,5 +1,5 @@
 {
-  "projectName": "quarkus-qr",
+  "projectName": "shared-github-workflows",
   "projectOwner": "turing85",
   "files": [
     "CONTRIBUTORS.md",

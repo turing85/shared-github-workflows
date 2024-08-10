@@ -1,0 +1,130 @@
+= Inputs
+
+[cols=4*,options=header]
+|===
+| name
+| description
+| Required?
+| default value
+
+4+^| **GraalVM configuration**
+
+a|
+----
+graalvm-distribution
+----
+| The GraalVM Distribution to use.
+| ✅
+a|
+----
+mandrel
+----
+
+a|
+----
+graalvm-version
+----
+| The GraalVM Distribution version to use.
+| ✅
+a|
+----
+mandrel-23.1.2.0-Final
+----
+
+a|
+----
+java-version
+----
+| The Java version of the GraalVM Distribution.
+| ✅
+a|
+----
+'21'
+----
+
+4+^| **Maven execution configuration**
+
+a|
+----
+maven-opts
+----
+| Options passed to the maven command.
+| ✅
+a|
+----
+--batch-mode
+--color always
+----
+
+a|
+----
+maven-targets
+----
+| The maven targets (goals and/or phases) to execute.
+| ✅
+a|
+----
+verify
+----
+
+4+^| **Artifact-related configuration**
+
+4+^| Upload
+
+a|
+----
+artifact-retention-days
+----
+| Duration in days after which the artifacts will expire.
+| ✅
+a|
+----
+'2'
+----
+
+a|
+----
+executable-artifact-name
+----
+| The name for the artifact holding the executable.
+| ✅
+a|
+----
+executable
+----
+
+a|
+----
+executable-artifact-path
+----
+| The path to the executable and related files (if any).
+| ✅
+a|
+----
+target/*-runner
+target/*.so
+----
+
+a|
+----
+test-report-artifact-name
+----
+| The name for the artifact holding the test report.
+| ✅
+a|
+----
+test-report-native
+----
+
+a|
+----
+test-report-artifact-path
+----
+| The path to the test report.
+| ✅
+a|
+----
+'**/target/**/TEST*.xml'
+----
+
+|===

@@ -1,6 +1,59 @@
+:toc:
+:toclevels: 4
 = Shared Github Workflows
 
-A collection of workflows to use in (mostly java-based) projects.
+A collection of workflows and actions to use in (mostly java-based) projects.
+
+== Core philosophy
+
+Since this project provides both workflows and actions, we need to make the actions accessible.
+For this, we clone this repository into the current run.
+This requires that we always check out the actual repository of the action that should be built first and then check out the workflow repository into the existing working directory.
+
+A typical workflow snippet might look like this:
+
+.Typical workflow snippet to checkout the necessary repositores, and run an action
+[source, yaml]
+----
+...
+jobs:
+  populate-cache:
+    name: Populate Cache
+    runs-on: ubuntu-latest
+
+    steps:
+      # This checks out the repository to build
+      - name: Git checkout
+        id: git-checkout
+        uses: actions/checkout@v4
+
+      # This checks out the shared workflows repository into directory
+      # 'shared-github-workflows'
+      - name: Git Checkout shared workflows
+        id: git-checkout-shared-workflows
+        uses: actions/checkout@v4
+        with:
+          path: shared-github-workflows
+          repository: turing85/shared-github-workflows
+          ref: main
+
+      # This calls an action from the shared workflows repository
+      - name: Populate Cache
+        id: populate-cache
+        # Notice this path, which is relative to the checked out
+        # workflow repository
+        uses: ./shared-github-workflows/.github/actions/java/maven/populate-cache
+        with:
+          graalvm-distribution: ${{ inputs.graalvm-distribution }}
+          graalvm-version: ${{ inputs.graalvm-version }}
+          java-version: ${{ inputs.java-version }}
+
+          maven-opts: ${{ inputs.maven-opts-populate }}
+          maven-targets: ${{ inputs.maven-targets-populate }}
+...
+----
+
+include::.github/actions/README.adoc[leveloffset=+1]
 
 == Contributors ✨
 

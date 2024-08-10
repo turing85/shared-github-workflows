@@ -1,0 +1,31 @@
+= Populate cache
+
+This action can be used to initialize the maven cache.
+
+include::docs/includes/components.adoc[leveloffset=+1]
+
+== Prerequisites
+
+include::../docs/includes/prereq-maven-wrapper.adoc[]
+
+== What it does
+
+The action clones the repository and sets up the GraalVM version defined.
+
+To populate the cache, the executes the following command:
+
+.Command executed to populate the cache
+[source, bash]
+----
+$ ./mvnw \
+  ${{ inputs.maven-opts }} \
+  ${{ inputs.maven-targets }}
+----
+
+include::docs/includes/artifacts.adoc[leveloffset=+1]
+
+include::docs/includes/inputs.adoc[leveloffset=+1]
+
+include::docs/includes/outputs.adoc[leveloffset=+1]
+
+include::docs/includes/examples.adoc[leveloffset=+1]

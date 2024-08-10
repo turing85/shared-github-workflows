@@ -1,0 +1,149 @@
+name: OWASP Scan
+
+description: An action to run an OWASP scan on a report
+
+inputs:
+  graalvm-distribution:
+    description: The distribution of GraalVM to use.
+    default: mandrel
+    required: true
+  graalvm-version:
+    description: The version of the GraalVM distribution to use.
+    default: 23.1.2.0-Final
+    required: true
+  java-version:
+    description: The Java version to use.
+    default: '21'
+    required: true
+
+  maven-opts:
+    description: Options passed to the maven command.
+    default: >-
+      --batch-mode
+      --color always
+      --define failBuildOnCVSS=0
+      --define format=junit
+      --define odc.outputDirectory=\${project.build.directory}/owasp
+    required: true
+  maven-targets:
+    description: The maven targets (goals and/or phases) to execute.
+    default: org.owasp:dependency-check-maven:check
+    required: true
+
+  download-artifacts:
+    description: Whether artifacts (Maven state, compiled classes and JARs) should be downloaded.
+    default: 'true'
+    required: false
+  compiled-classes-artifact-name:
+    description: |
+      The name for the artifact holding all compiled classes.
+      Set to '' (empty string) to unset.
+    default: compiled-classes
+    required: true
+  compiled-classes-artifact-pattern:
+    description: |
+      The pattern for the artifact holding all compiled classes.
+      Will be ignored when compiled-classes-artifact-name is set.
+    required: false
+  compiled-classes-artifact-merge-multiple:
+    description: Whether multiple compiled classes artifacts should be merged.
+    default: 'true'
+    required: true
+  maven-state-artifact-name:
+    description: |
+      The name for the artifact holding the maven state(s).
+      Set to '' (empty string) to unset.
+    default: maven-state
+    required: true
+  maven-state-artifact-pattern:
+    description: |
+      The pattern for the artifact holding the maven state(s).
+      Will be ignored when maven-state-artifact-name is set.
+    required: false
+  maven-state-artifact-merge-multiple:
+    description: Whether multiple maven state artifacts should be merged.
+    default: 'true'
+    required: true
+
+  artifact-retention-days:
+    description: Duration in days after which the artifacts will expire.
+    default: '2'
+    required: true
+  owasp-report-artifact-name:
+    description: The name for the artifact holding the OWASP report.
+    default: owasp-report
+    required: true
+  owasp-report-artifact-path:
+    description: The path to the OWASP report.
+    default: '**/target/owasp/*.xml'
+    required: true
+
+  nvd-api-key:
+    description: The API key for the NVD database, used by the dependency-check scan plugin.
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Download OWASP DB Cache
+      id: download-owasp-db-cache
+      uses: actions/cache@v4
+      with:
+        key: owasp-db
+        path: owasp-db
+
+    - name: Download Maven State
+      id: download-maven-state
+      uses: actions/download-artifact@v4
+      if: ${{ inputs.download-artifacts == 'true' }}
+      with:
+        merge-multiple: ${{ inputs.maven-state-merge-multiple == 'true' }}
+        name: ${{ inputs.maven-state-artifact-name }}
+        pattern: ${{ inputs.maven-state-artifact-pattern }}
+
+    - name: Download Compiled Classes
+      id: download-compiled-classes
+      uses: actions/download-artifact@v4
+      if: ${{ inputs.download-artifacts == 'true' }}
+      with:
+        merge-multiple: ${{ inputs.compiled-classes-merge-multiple == 'true' }}
+        name: ${{ inputs.compiled-classes-artifact-name }}
+        pattern: ${{ inputs.compiled-classes-artifact-pattern }}
+
+    - name: OWASP CVE Scan
+      id: owasp-cve-scan
+      uses: ./shared-github-workflows/.github/actions/java/maven/build
+      with:
+        maven-opts: >-
+          --define dataDirectory=owasp-db
+          --define nvdApiKey=${{ inputs.nvd-api-key }}
+          ${{ inputs.maven-opts }}
+        maven-targets: ${{ inputs.maven-targets }}
+
+    - name: Upload OWASP DB Cache
+      id: upload-owasp-db-cache
+      uses: actions/cache/save@v4
+      if: ${{ steps.download-owasp-db-cache.outputs.cache-hit != 'true' }}
+      with:
+        key: owasp-db
+        path: owasp-db
+
+    - name: Upload OWASP Scan Report
+      id: upload-owasp-scan-report
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        if-no-files-found: error
+        name: ${{ inputs.owasp-report-artifact-name }}
+        path: ${{ inputs.owasp-report-artifact-path }}
+        retention-days: ${{ inputs.artifact-retention-days }}
+
+    - name: Publish Report
+      id: publish-report
+      if: ${{ always() }}
+      uses: turing85/publish-report@v2
+      with:
+        report-list-tests: failed
+        report-name: OWASP Scan
+        report-path: ${{ inputs.owasp-report-artifact-path }}

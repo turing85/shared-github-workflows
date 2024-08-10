@@ -1,0 +1,206 @@
+= Inputs
+
+[cols=4*,options=header]
+|===
+| name
+| description
+| Required?
+| default value
+
+4+^| **GraalVM configuration**
+
+a|
+----
+graalvm-distribution
+----
+| The distribution of GraalVM to use.
+| ✅
+a|
+----
+mandrel
+----
+
+a|
+----
+graalvm-version
+----
+| The version of the GraalVM distribution to use.
+| ✅
+a|
+----
+23.1.2.0-Final
+----
+
+a|
+----
+java-version
+----
+| The Java version to use.
+| ✅
+a|
+----
+'21'
+----
+
+4+^| **Maven execution configuration**
+
+a|
+----
+maven-opts
+----
+| Options passed to the maven command.
+| ✅
+a|
+----
+--batch-mode
+--color always
+--define format=junit
+--define odc.outputDirectory=\${project.build.directory}/owasp
+----
+
+a|
+----
+maven-targets
+----
+| The maven targets (goals and/or phases) to execute.
+| ✅
+a|
+----
+compile
+org.owasp:dependency-check-maven:check
+----
+
+4+^| **Artifact-related configuration**
+
+4+^| Download
+
+a|
+----
+download-artifacts
+----
+| Whether artifacts (Maven state, compiled classes and JARs) should be downloaded.
+| ✅
+a|
+----
+'true'
+----
+
+a|
+----
+compiled-classes-artifact-name
+----
+a| The pattern for the artifact holding all compiled classes.
+
+Set to `''` (empty string) to unset.
+| ✅
+a|
+----
+compiled-classes
+----
+
+a|
+----
+compiled-classes-artifact-pattern
+----
+a| The pattern for the artifact holding all compiled classes.
+
+Will be ignored when `compiled-classes-artifact-name` is set.
+| ✅
+a|
+----
+compiled-classes
+----
+
+a|
+----
+compiled-classes-artifact-merge-multiple
+----
+| Whether multiple compiled classes artifacts should be merged.
+| ✅
+a|
+----
+'true'
+----
+
+a|
+----
+maven-state-artifact-name
+----
+a| The name for the artifact holding the maven state(s).
+
+Set to `''` (empty string) to unset.
+| ✅
+a|
+----
+maven-state
+----
+
+a|
+----
+maven-state-artifact-pattern
+----
+a| The pattern for the artifact holding the maven state(s).
+
+Will be ignored when `maven-state-artifact-name` is set.
+| ✅
+a|
+----
+maven-state
+----
+
+a|
+----
+maven-state-artifact-merge-multiple
+----
+| Whether multiple maven state artifacts should be merged.
+| ✅
+a|
+----
+'true'
+----
+
+4+^| Upload
+
+a|
+----
+artifact-retention-days
+----
+| Duration in days after which the artifacts will expire.
+| ✅
+a|
+----
+'2'
+----
+
+a|
+----
+owasp-report-artifact-name
+----
+| The name for the artifact holding the OWASP report.
+| ✅
+a|
+----
+owasp-report
+----
+
+a|
+----
+owasp-report-artifact-path
+----
+| The path to the OWASP report.
+| ✅
+a|
+----
+'**/target/owasp/*.xml'
+----
+
+4+^| **OWASP Scan configuration**
+
+a|
+----
+nvd-api-key
+----
+| The API key for the NVD database, used by the dependency-check scan plugin.
+| ✅
+|
+|===

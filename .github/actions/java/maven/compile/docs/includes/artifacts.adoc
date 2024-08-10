@@ -1,0 +1,32 @@
+= Artifact
+
+The following artifacts are uploaded.
+
+[cols=3*,options=header]
+|===
+| artifact name
+| description
+| path(s)
+
+a|
+----
+${{ inputs.compiled-classes-artifact-name }}
+----
+| all compiled classes
+a|
+----
+'**/target/*classes'
+----
+
+a|
+----
+${{ inputs.maven-state-artifact-name }}
+----
+| the maven state for incremental builds
+a|
+----
+'**/target/maven-*'
+----
+|===
+
+All artifacts are deleted after `${{ inputs.artifact-retention-days }}`.

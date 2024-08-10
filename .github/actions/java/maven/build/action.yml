@@ -1,0 +1,49 @@
+name: Maven Build
+
+description: An action to build an application with Maven
+
+inputs:
+  graalvm-distribution:
+    description: The GraalVM distribution to use.
+    default: mandrel
+    required: true
+  graalvm-version:
+    description: The GraalVM distribution version to use.
+    default: mandrel-23.1.2.0-Final
+    required: true
+  java-version:
+    description: The Java version of the GraalVM distribution.
+    default: '21'
+    required: true
+
+  maven-opts:
+    description: Options passed to the maven command.
+    default: >-
+      --batch-mode
+      --color always
+    required: true
+  maven-targets:
+    description: The maven targets (goals and/or phases) to execute.
+    default: verify
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Set up ${{ inputs.graalvm-distribution }} ${{ inputs.graalvm-version }} (Java ${{ inputs.java-version }})
+      id: setup
+      uses: graalvm/setup-graalvm@v1
+      with:
+        cache: 'maven'
+        distribution: ${{ inputs.graalvm-distribution }}
+        java-version: ${{ inputs.java-version }}
+        version: ${{ inputs.graalvm-version }}
+
+    - name: Maven build
+      id: maven-build
+      run: |
+        ./mvnw \
+          ${{ inputs.maven-opts }} \
+          ${{ inputs.maven-targets }}
+      shell: bash

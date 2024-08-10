@@ -1,0 +1,50 @@
+= OWASP Scan
+
+This action can be used to run an OWASP scan and generate an OWASP artifact.
+
+include::docs/includes/components.adoc[leveloffset=+1]
+
+== Prerequisites
+
+include::../docs/includes/prereq-maven-wrapper.adoc[]
+
+== What it does
+
+The action clones the repository and sets up the GraalVM version defined.
+
+If requested, the action downloads the compiled-classes and maven-state artifacts.
+
+To generate the report, the executes the following command:
+
+.Command executed to generate the OWASP report
+[source, bash]
+----
+$ ./mvnw \
+  --define dataDirectory=owasp-db \
+  --define nvdApiKey=${{ secrets.nvd-api-key }} \
+  ${{ inputs.maven-opts }} \
+  ${{ inputs.maven-targets }}
+----
+
+== NVD API Key
+
+The action requires that a NVD API key is configured.
+The maven execution of the link:https://jeremylong.github.io/DependencyCheck/dependency-check-maven/[`dependency-check-maven` plugin] is preconfigured to use the NVD API Key.
+
+== OWASP Cache
+
+The action sets up a global OWASP database cache.
+The cache is named `owasp-db` and is used to store the OWASP database.
+The cache is bound to the directory `owasp-db`, and the maven execution is preconfigured such that the link:https://jeremylong.github.io/DependencyCheck/dependency-check-maven/[`dependency-check-maven` plugin] reads and writes to this directory.
+
+== Publishing report
+All files matching the pattern `${{ inputs.owasp-report-artifact-path }}` are automatically published as report.
+The report name is `owasp-report`.
+
+include::docs/includes/artifacts.adoc[leveloffset=+1]
+
+include::docs/includes/inputs.adoc[leveloffset=+1]
+
+include::docs/includes/outputs.adoc[leveloffset=+1]
+
+include::docs/includes/examples.adoc[leveloffset=+1]

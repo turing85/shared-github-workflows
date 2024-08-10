@@ -1,0 +1,69 @@
+= Inputs
+
+[cols=4*,options=header]
+|===
+| name
+| description
+| Required?
+| default value
+
+4+^| **GraalVM configuration**
+
+a|
+----
+graalvm-distribution
+----
+| The GraalVM distribution to use.
+| ✅
+a|
+----
+mandrel
+----
+
+a|
+----
+graalvm-version
+----
+| The GraalVM distribution version to use.
+| ✅
+a|
+----
+mandrel-23.1.2.0-Final
+----
+
+a|
+----
+java-version
+----
+| The Java version of the GraalVM distribution.
+| ✅
+a|
+----
+'21'
+----
+
+4+^| **Maven execution configuration**
+
+a|
+----
+maven-opts
+----
+| Options passed to the maven command.
+| ✅
+a|
+----
+--batch-mode
+--color always
+----
+
+a|
+----
+maven-targets
+----
+| The maven targets (goals and/or phases) to execute.
+| ✅
+a|
+----
+package
+----
+|===

@@ -1,0 +1,32 @@
+= Artifact
+
+The following artifacts are uploaded.
+
+[cols=3*,options=header]
+|===
+| artifact name
+| description
+| path(s)
+
+a|
+----
+${{ inputs.executable-artifact-name }}
+----
+| the executable and related files (if any)
+a|
+----
+${{ inputs.executable-artifact-path }}
+----
+
+a|
+----
+${{ inputs.test-report-artifact-name }}
+----
+| the test reports
+a|
+----
+${{ inputs.test-report-artifact-path }}
+----
+|===
+
+All artifacts are deleted after `${{ inputs.artifact-retention-days }}`.

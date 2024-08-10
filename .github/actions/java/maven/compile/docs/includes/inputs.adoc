@@ -1,0 +1,96 @@
+= Inputs
+
+[cols=4*,options=header]
+|===
+| name
+| description
+| Required?
+| default value
+
+4+^| **GraalVM configuration**
+
+a|
+----
+graalvm-distribution
+----
+| The GraalVM distribution to use.
+| ✅
+a|
+----
+mandrel
+----
+
+a|
+----
+graalvm-version
+----
+| The GraalVM distribution version to use.
+| ✅
+a|
+----
+mandrel-23.1.2.0-Final
+----
+
+a|
+----
+java-version
+----
+| The Java version of the GraalVM distribution.
+| ✅
+a|
+----
+'21'
+----
+
+4+^| **Maven execution configuration**
+
+a|
+----
+maven-opts
+----
+| Options passed to the maven command.
+| ✅
+a|
+----
+--batch-mode
+--color always
+----
+
+4+^| **Artifact-related configuration**
+
+4+^| Upload
+
+a|
+----
+artifact-retention-days
+----
+| Duration in days after which the artifacts will expire.
+| ✅
+a|
+----
+'2'
+----
+
+a|
+----
+compiled-classes-artifact-name
+----
+| The name for the artifact holding all compiled classes.
+| ✅
+a|
+----
+compiled-classes
+----
+
+a|
+----
+maven-state-artifact-name
+----
+| The name for the artifact holding the maven state.
+| ✅
+a|
+----
+maven-state
+----
+
+|===

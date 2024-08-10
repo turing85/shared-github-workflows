@@ -1,0 +1,62 @@
+= Artifact
+
+The following artifacts are uploaded.
+
+[cols=3*,options=header]
+|===
+| artifact name
+| description
+| path(s)
+
+a|
+----
+${{ inputs.compiled-classes-artifact-name }}
+----
+| all compiled classes
+a|
+----
+'**/target/*classes'
+----
+
+a|
+----
+${{ inputs.fast-jar-artifact-name }}
+----
+| the created fast jar
+a|
+----
+${{ inputs.fast-jar-artifact-path }}
+----
+
+a|
+----
+${{ inputs.jars-artifact-name }}
+----
+| all created jar files
+a|
+----
+'**/target/*.jar'
+----
+
+a|
+----
+${{ inputs.maven-state-artifact-name }}
+----
+| the maven state for incremental builds
+a|
+----
+'**/target/maven-*'
+----
+
+a|
+----
+${{ inputs.test-report-artifact-name }}
+----
+| the test reports
+a|
+----
+${{ inputs.test-report-artifact-path }}
+----
+|===
+
+All artifacts are deleted after `${{ inputs.artifact-retention-days }}`.

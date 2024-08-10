@@ -1,0 +1,11 @@
+= Components
+
+This action is a composite action, it uses the following actions.
+
+[cols=1*,options=header]
+|===
+^| Action
+^| **direct**
+
+^|link:https://github.com/graalvm/setup-graalvm[`graalvm/setup-graalvm@v1`]
+|===

@@ -1,0 +1,275 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      graalvm-distribution:
+        description: The GraalVM Distribution to use
+        default: mandrel
+        required: true
+        type: string
+      graalvm-version:
+        description: the GraalVM Distribution version to use
+        default: mandrel-23.1.2.0-Final
+        required: true
+        type: string
+      java-version:
+        description: The Java version of the GraalVM Distribution
+        default: 21
+        required: true
+        type: string
+
+      maven-opts-jvm:
+        description: Options passed to the maven command for the JVM Build.
+        default: >-
+          --batch-mode
+          --color always
+        required: true
+        type: string
+      maven-opts-native:
+        description: Options passed to the maven command for the Native Build.
+        default: >-
+          --batch-mode
+          --color always
+        required: true
+        type: string
+      maven-opts-owasp:
+        description: Options passed to the maven command for the OWASP analysis.
+        default: >-
+          --batch-mode
+          --color always
+          --define failBuildOnCVSS=0
+          --define format=junit
+          --define odc.outputDirectory=\${project.build.directory}/owasp
+        required: true
+        type: string
+      maven-opts-populate:
+        description: Options passed to the maven command for Cache population.
+        default: >-
+          --batch-mode
+          --color always
+        required: true
+        type: string
+      maven-targets-jvm:
+        description: The maven targets (goals and/or phases) to execute for the JVM build.
+        default: org.owasp:dependency-check-maven:check
+        required: true
+        type: string
+      maven-targets-native:
+        description: The maven targets (goals and/or phases) to execute for the native build.
+        default: verify
+        required: true
+        type: string
+      maven-targets-owasp:
+        description: The maven targets (goals and/or phases) to execute for the OWASP analysis.
+        default: org.owasp:dependency-check-maven:check
+        required: true
+        type: string
+      maven-targets-populate:
+        description: The maven targets (goals and/or phases) to execute for Cache population.
+        default: verify
+        required: true
+        type: string
+
+      run-owasp:
+        description: |
+          Whether OWASP CVE dependency check should be run. 
+          This requires an NVD API key provided through secret nvd-api-key.
+        default: false
+        required: true
+        type: boolean
+
+    secrets:
+      nvd-api-key:
+        description: The API Key used for Dependency Analysis.
+        required: false
+
+env:
+  DOCKER_BUILDKIT: 1
+
+permissions:
+  actions: write
+  checks: write
+  pull-requests: write
+
+jobs:
+  recreate-comment:
+    name: Recreate Comment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Publish Report
+        id: publish-report
+        uses: turing85/publish-report@v2
+        with:
+          checkout: true
+          recreate-comment: true
+
+  populate-cache:
+    name: Populate Cache
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        id: git-checkout
+        uses: actions/checkout@v4
+
+      - name: Git Checkout shared workflows
+        id: git-checkout-shared-workflows
+        uses: actions/checkout@v4
+        with:
+          path: shared-github-workflows
+          ref: main
+          repository: turing85/shared-github-workflows
+
+      - name: Populate Cache
+        id: populate-cache
+        uses: ./shared-github-workflows/.github/actions/java/maven/populate-cache
+        with:
+          graalvm-distribution: ${{ inputs.graalvm-distribution }}
+          graalvm-version: ${{ inputs.graalvm-version }}
+          java-version: ${{ inputs.java-version }}
+
+          maven-opts: ${{ inputs.maven-opts-populate }}
+          maven-targets: ${{ inputs.maven-targets-populate }}
+
+  build-and-test-jvm:
+    name: Build and Test (JVM)
+    runs-on: ubuntu-latest
+
+    needs:
+      - populate-cache
+
+    steps:
+      - name: Git checkout
+        id: git-checkout
+        uses: actions/checkout@v4
+
+      - name: Git Checkout shared workflows
+        id: git-checkout-shared-workflows
+        uses: actions/checkout@v4
+        with:
+          path: shared-github-workflows
+          ref: main
+          repository: turing85/shared-github-workflows
+
+      - name: Build and Test
+        id: build-and-test
+        uses: ./shared-github-workflows/.github/actions/java/maven/quarkus/single-module/build-and-test-jvm
+        with:
+          graalvm-distribution: ${{ inputs.graalvm-distribution }}
+          graalvm-version: ${{ inputs.graalvm-version }}
+          java-version: ${{ inputs.java-version }}
+
+          maven-opts: ${{ inputs.maven-opts-jvm }}
+          maven-targets: ${{ inputs.maven-targets-jvm }}
+
+  build-and-test-native:
+    name: Build and Test (Native)
+    runs-on: ubuntu-latest
+
+    needs:
+      - populate-cache
+
+    steps:
+      - name: Git checkout
+        id: git-checkout
+        uses: actions/checkout@v4
+
+      - name: Git Checkout shared workflows
+        id: git-checkout-shared-workflows
+        uses: actions/checkout@v4
+        with:
+          path: shared-github-workflows
+          ref: main
+          repository: turing85/shared-github-workflows
+
+      - name: Build and Test
+        id: build-and-test
+        uses: ./shared-github-workflows/.github/actions/java/maven/quarkus/single-module/build-and-test-native
+        with:
+          graalvm-distribution: ${{ inputs.graalvm-distribution }}
+          graalvm-version: ${{ inputs.graalvm-version }}
+          java-version: ${{ inputs.java-version }}
+
+          maven-opts: ${{ inputs.maven-opts-native }}
+          maven-targets: ${{ inputs.maven-targets-native }}
+
+  owasp-scan:
+    name: OWASP Scan
+    runs-on: ubuntu-latest
+    if: ${{ inputs.run-owasp }}
+
+    needs:
+      - populate-cache
+      - recreate-comment
+
+    steps:
+      - name: Git checkout
+        id: git-checkout
+        uses: actions/checkout@v4
+
+      - name: Git Checkout shared workflows
+        id: git-checkout-shared-workflows
+        uses: actions/checkout@v4
+        with:
+          path: shared-github-workflows
+          ref: main
+          repository: turing85/shared-github-workflows
+
+      - name: OWASP Scan
+        id: owasp-scan
+        uses: ./shared-github-workflows/.github/actions/java/maven/owasp-scan
+        with:
+          graalvm-distribution: ${{ inputs.graalvm-distribution }}
+          graalvm-version: ${{ inputs.graalvm-version }}
+          java-version: ${{ inputs.java-version }}
+
+          maven-opts: ${{ inputs.maven-opts-owasp }}
+          maven-targets: ${{ inputs.maven-targets-owasp }}
+
+          download-artifacts: false
+
+          nvd-api-key: ${{ secrets.nvd-api-key }}
+
+  test-report-jvm:
+    name: Test Report (JVM)
+    runs-on: ubuntu-latest
+
+    needs:
+      - build-and-test-jvm
+      - recreate-comment
+
+    steps:
+      - name: Publish report (JVM Test)
+        id: publish-report-jvm-test
+        uses: turing85/publish-report@v2
+        if: ${{ always() }}
+        with:
+          cancel-workflow-on-error: true
+          checkout: true
+          download-artifact-name: test-report-jvm
+          report-name: JVM Test
+          report-only-summary: true
+          report-path: '**/target/**/TEST*.xml'
+
+  test-report-native:
+    name: Test Report (Native)
+    runs-on: ubuntu-latest
+
+    needs:
+      - build-and-test-native
+      - recreate-comment
+
+    steps:
+      - name: Publish Report (Native Test)
+        id: publish-report-native-test
+        uses: turing85/publish-report@v2
+        if: ${{ always() }}
+        with:
+          cancel-workflow-on-error: true
+          checkout: true
+          download-artifact-name: test-report-native
+          report-name: Native Test
+          report-only-summary: true
+          report-path: '**/target/**/TEST*.xml'

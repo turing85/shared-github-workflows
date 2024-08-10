@@ -1,0 +1,127 @@
+name: Build and Test (JVM)
+
+description: An action to build and test a Quarkus application in JVM Mode
+
+inputs:
+  graalvm-distribution:
+    description: The GraalVM Distribution to use.
+    default: mandrel
+    required: true
+  graalvm-version:
+    description: The GraalVM Distribution version to use.
+    default: mandrel-23.1.2.0-Final
+    required: true
+  java-version:
+    description: The Java version of the GraalVM Distribution.
+    default: '21'
+    required: true
+
+  maven-opts:
+    description: Options passed to the maven command.
+    default: >-
+      --batch-mode
+      --color always
+    required: true
+  maven-targets:
+    description: The maven targets (goals and/or phases) to execute.
+    default: verify
+    required: true
+
+  compiled-classes-artifact-name:
+    description: The name for the artifact holding all compiled classes.
+    default: compiled-classes
+    required: true
+  maven-state-artifact-name:
+    description: The name for the artifact holding the maven state.
+    default: maven-state
+    required: true
+
+  artifact-retention-days:
+    description: Duration in days after which the artifacts will expire.
+    default: '2'
+    required: true
+  fast-jar-artifact-name:
+    description: The name for the artifact holding the fast jar.
+    default: fast-jar
+    required: true
+  fast-jar-artifact-path:
+    description: The path to the directory holding the fast-jar.
+    default: target/quarkus-app
+    required: true
+  jars-artifact-name:
+    description: The name for the artifact holding all jars.
+    default: jars
+    required: true
+  test-report-artifact-name:
+    description: The name for the artifact holding the test report.
+    default: test-report-jvm
+    required: true
+  test-report-artifact-path:
+    description: The path to the test report.
+    default: '**/target/**/TEST*.xml'
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+    - name: Build and Test
+      id: build-and-test
+      uses: ./shared-github-workflows/.github/actions/java/maven/build
+      with:
+        graalvm-distribution: ${{ inputs.graalvm-distribution }}
+        graalvm-version: ${{ inputs.graalvm-version }}
+        java-version: ${{ inputs.java-version }}
+
+        maven-opts: ${{ inputs.maven-opts }}
+        maven-targets: ${{ inputs.maven-targets }}
+
+    - name: Upload Maven State
+      id: upload-maven-state
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        if-no-files-found: error
+        name: ${{ inputs.maven-state-artifact-name }}
+        path: '**/target/maven-*'
+        retention-days: ${{ inputs.artifact-retention-days }}
+
+    - name: Upload Compiled Classes
+      id: upload-compiled-classes
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        if-no-files-found: error
+        name: ${{ inputs.compiled-classes-artifact-name }}
+        path: '**/target/*classes'
+        retention-days: ${{ inputs.artifact-retention-days }}
+
+    - name: Upload JARs
+      id: upload-jars
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        if-no-files-found: error
+        name: ${{ inputs.jars-artifact-name }}
+        path: '**/target/*.jar'
+        retention-days: ${{ inputs.artifact-retention-days }}
+
+    - name: Upload Fast-JAR
+      id: upload-fast-jar
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        if-no-files-found: error
+        name: ${{ inputs.fast-jar-artifact-name }}
+        path: ${{ inputs.fast-jar-artifact-path }}
+        retention-days: ${{ inputs.artifact-retention-days }}
+
+    - name: Upload Test Report
+      id: upload-test-report
+      uses: actions/upload-artifact@v4
+      if: ${{ always() }}
+      with:
+        if-no-files-found: error
+        name: ${{ inputs.test-report-artifact-name }}
+        path: ${{ inputs.test-report-artifact-path }}
+        retention-days: ${{ inputs.artifact-retention-days }}

@@ -1,0 +1,31 @@
+= Quarkus - Single Module - Build and test (JVM)
+
+This action can be used to build and test a single-module quarkus application with maven.
+
+include::docs/includes/components.adoc[leveloffset=+1]
+
+== Prerequisites
+
+include::../../../docs/includes/prereq-maven-wrapper.adoc[]
+
+== What it does
+
+The action clones the repository and sets up the GraalVM version defined.
+
+The application is then built with the following command.
+
+.Command executed to build the application
+[source, bash]
+----
+$ ./mvnw \
+  ${{ inputs.maven-opts }} \
+  ${{ inputs.maven-targets }}
+----
+
+include::docs/includes/artifacts.adoc[leveloffset=+1]
+
+include::docs/includes/inputs.adoc[leveloffset=+1]
+
+include::docs/includes/outputs.adoc[leveloffset=+1]
+
+include::docs/includes/examples.adoc[leveloffset=+1]

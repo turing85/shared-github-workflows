@@ -1,0 +1,63 @@
+= Artifacts
+
+The following artifacts are downloaded if artifact download is enable (`${{ inputs.download-artifaces }}` is set to `'true'`).
+Artifact name has precedence over artifact pattern.
+Merge multiple is only applied when artifact pattern is used.
+
+[cols=4*,options=header]
+|===
+| artifact name
+| artifact pattern
+| description
+| merge multiple?
+
+a|
+----
+${{ inputs.compiled-classes-artifact-name }}
+----
+a|
+----
+${{ inputs.compiled-classes-artifact-pattern }}
+----
+| compiled classes
+a|
+----
+${{ inputs.compiled-classes-artifact-merge-multiple }}
+----
+
+a|
+----
+${{ inputs.maven-state-artifact-name }}
+----
+a|
+----
+${{ inputs.maven-state-artifact-pattern }}
+----
+| the maven state for incremental builds
+a|
+----
+${{ inputs.maven-state-artifact-merge-multiple }}
+----
+
+|===
+
+The following artifacts are uploaded.
+
+[cols=3*,options=header]
+|===
+| artifact name
+| description
+| path(s)
+
+a|
+----
+${{ inputs.owasp-report-artifact-name }}
+----
+| OWASP Report
+a|
+----
+${{ inputs.owasp-report-artifact-path }}
+----
+|===
+
+All artifacts are deleted after `${{ inputs.artifact-retention-days }}`.
