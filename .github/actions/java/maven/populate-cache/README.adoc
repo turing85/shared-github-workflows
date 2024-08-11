@@ -1,3 +1,4 @@
+ifndef::prefix[:prefix: ../../../../..]
 = Populate cache
 
 This action can be used to initialize the maven cache.

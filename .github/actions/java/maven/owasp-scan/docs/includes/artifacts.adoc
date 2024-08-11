@@ -1,3 +1,4 @@
+ifndef::prefix[:prefix: ../../../../../../..]
 = Artifacts
 
 The following artifacts are downloaded if artifact download is enable (`${{ inputs.download-artifaces }}` is set to `'true'`).

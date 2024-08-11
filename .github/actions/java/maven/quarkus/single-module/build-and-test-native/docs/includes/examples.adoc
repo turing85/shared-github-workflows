@@ -2,5 +2,5 @@
 
 For example usages, please take a look at:
 
-* link:.github/workflows/java-nightly-cve-scan.yml[`.github/workflows/java-nightly-cve-scan.yml`], and
-* link:.github/workflows/java-quarkus-single-module-build.yml[`.github/workflows/java-quarkus-single-module-build.yml`]
+* linkg:{prefix}/.github/workflows/java-nightly-cve-scan.yml[`.github/workflows/java-nightly-cve-scan.yml`], and
+* linkg:{prefix}/.github/workflows/java-quarkus-single-module-build.yml[`.github/workflows/java-quarkus-single-module-build.yml`]

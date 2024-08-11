@@ -1,3 +1,4 @@
+ifndef::prefix[:prefix: ../../../../..]
 = OWASP Scan
 
 This action can be used to run an OWASP scan and generate an OWASP artifact.

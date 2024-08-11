@@ -1,3 +1,5 @@
+ifndef::prefix[:prefix: ../../../../../..]
+
 include::build-and-test-jvm/README.adoc[]
 
 include::build-and-test-native/README.adoc[]

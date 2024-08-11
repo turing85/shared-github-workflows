@@ -1,1 +1,2 @@
+ifndef::prefix[:prefix: ../../../../..]
 include::single-module/README.adoc[]

@@ -1,3 +1,4 @@
+ifndef::prefix[:prefix: ../..]
 = Actions
 
 The following actions are provided.

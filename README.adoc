@@ -1,5 +1,6 @@
 :toc:
 :toclevels: 4
+ifndef::prefix[:prefix: .]
 = Shared Github Workflows
 
 A collection of workflows and actions to use in (mostly java-based) projects.

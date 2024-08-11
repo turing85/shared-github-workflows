@@ -1,3 +1,4 @@
+ifndef::prefix[:prefix: ../../../../../../..]
 = Components
 
 This action is a composite action, it uses the following actions.

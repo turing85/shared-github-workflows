@@ -1,3 +1,4 @@
+ifndef::prefix[:prefix: ../../../../../../..]
 = Components
 
 This action is a composite action, it uses the following actions.
@@ -8,7 +9,7 @@ This action is a composite action, it uses the following actions.
 
 ^| **direct**
 ^|link:https://github.com/actions/upload-artifact[`actions/upload-artifact@v4`]
-^|link:.github/actions/java/maven/build/action.yml[`.github/actions/java/maven/build/action.yml`]
+^|linkg:{prefix}/.github/actions/java/maven/build/action.yml[`.github/actions/java/maven/build/action.yml`]
 
 ^| **indirect**
 ^|link:https://github.com/graalvm/setup-graalvm[`graalvm/setup-graalvm@v1`]
