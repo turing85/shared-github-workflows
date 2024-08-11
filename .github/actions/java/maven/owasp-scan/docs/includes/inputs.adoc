@@ -204,4 +204,19 @@ nvd-api-key
 | The API key for the NVD database, used by the dependency-check scan plugin.
 | ✅
 |
+
+4+^| **PR commenting**
+
+a|
+----
+comment-enabled
+----
+|Whether a comment on the corresponding PR (if any) should be posted.
+| ✅
+a|
+----
+'true'
+----
+
+
 |===

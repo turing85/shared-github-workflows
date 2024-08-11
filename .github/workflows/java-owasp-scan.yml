@@ -6,19 +6,20 @@ on:
       graalvm-distribution:
         description: The GraalVM Distribution to use
         default: mandrel
-        required: true
+        required: false
         type: string
       graalvm-version:
         description: the GraalVM Distribution version to use
         default: mandrel-23.1.2.0-Final
-        required: true
+        required: false
         type: string
       java-version:
         description: The Java version of the GraalVM Distribution
         default: 21
-        required: true
+        required: false
         type: string
-      maven-opts-owasp:
+
+      maven-opts:
         description: Options passed to the maven command for the OWASP analysis.
         default: >-
           --batch-mode
@@ -26,25 +27,20 @@ on:
           --define failBuildOnCVSS=0
           --define format=junit
           --define odc.outputDirectory=\${project.build.directory}/owasp
-        required: true
+        required: false
         type: string
-      maven-opts-populate:
-        description: Options passed to the maven command for Cache population.
-        default: >-
-          --batch-mode
-          --color always
-        required: true
-        type: string
-      maven-targets-owasp:
+
+      maven-targets:
         description: The maven targets (goals and/or phases) to execute for the OWASP analysis.
         default: org.owasp:dependency-check-maven:check
-        required: true
+        required: false
         type: string
-      maven-targets-populate:
-        description: The maven targets (goals and/or phases) to execute for Cache population.
-        default: verify
-        required: true
-        type: string
+
+      comment-enabled:
+        description: Whether a comment on the corresponding PR (if any) should be posted
+        default: true
+        required: false
+        type: boolean
 
     secrets:
       nvd-api-key:
@@ -54,42 +50,12 @@ on:
 permissions:
   actions: write
   checks: write
+  pull-requests: write
 
 jobs:
-  populate-cache:
-    name: Populate Cache
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Git checkout
-        id: git-checkout
-        uses: actions/checkout@v4
-
-      - name: Git Checkout shared workflows
-        id: git-checkout-shared-workflows
-        uses: actions/checkout@v4
-        with:
-          path: shared-github-workflows
-          ref: main
-          repository: turing85/shared-github-workflows
-
-      - name: Populate Cache
-        id: populate-cache
-        uses: ./shared-github-workflows/.github/actions/java/maven/populate-cache
-        with:
-          graalvm-distribution: ${{ inputs.graalvm-distribution }}
-          graalvm-version: ${{ inputs.graalvm-version }}
-          java-version: ${{ inputs.java-version }}
-
-          maven-opts: ${{ inputs.maven-opts-populate }}
-          maven-targets: ${{ inputs.maven-targets-populate }}
-
   owasp-scan:
     name: OWASP Scan
     runs-on: ubuntu-latest
-
-    needs:
-      - populate-cache
 
     steps:
       - name: Git checkout
@@ -112,9 +78,11 @@ jobs:
           graalvm-version: ${{ inputs.graalvm-version }}
           java-version: ${{ inputs.java-version }}
 
-          maven-opts: ${{ inputs.maven-opts-owasp }}
-          maven-targets: ${{ inputs.maven-targets-owasp }}
+          maven-opts: ${{ inputs.maven-opts }}
+          maven-targets: ${{ inputs.maven-targets }}
 
           download-artifacts: false
 
           nvd-api-key: ${{ secrets.nvd-api-key }}
+
+          comment-enabled: ${{ inputs.comment-enabled }}

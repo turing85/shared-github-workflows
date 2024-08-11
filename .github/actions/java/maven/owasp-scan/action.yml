@@ -82,6 +82,11 @@ inputs:
     description: The API key for the NVD database, used by the dependency-check scan plugin.
     required: true
 
+  comment-enabled:
+    description: Whether a comment on the corresponding PR (if any) should be posted.
+    default: 'true'
+    required: true
+
 runs:
   using: composite
 
@@ -144,6 +149,7 @@ runs:
       if: ${{ always() }}
       uses: turing85/publish-report@v2
       with:
+        comment-enabled: ${{ inputs.comment-enabled }}
         report-list-tests: failed
         report-name: OWASP Scan
         report-path: ${{ inputs.owasp-report-artifact-path }}
