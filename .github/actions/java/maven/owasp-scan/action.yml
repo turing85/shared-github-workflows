@@ -118,7 +118,7 @@ runs:
 
     - name: OWASP CVE Scan
       id: owasp-cve-scan
-      uses: ./shared-github-workflows/.github/actions/java/maven/build
+      uses: turing85/shared-github-workflows/.github/actions/java/maven/build@main
       with:
         maven-opts: >-
           --define dataDirectory=owasp-db

@@ -69,17 +69,9 @@ jobs:
         id: git-checkout
         uses: actions/checkout@v4
 
-      - name: Git Checkout shared workflows
-        id: git-checkout-shared-workflows
-        uses: actions/checkout@v4
-        with:
-          path: shared-github-workflows
-          ref: main
-          repository: turing85/shared-github-workflows
-
       - name: Build and Test
         id: build-and-test
-        uses: ./shared-github-workflows/.github/actions/java/maven/quarkus/single-module/build-and-test-jvm
+        uses: turing85/shared-github-workflows/.github/actions/java/maven/quarkus/single-module/build-and-test-jvm@main
         with:
           graalvm-distribution: ${{ inputs.graalvm-distribution }}
           graalvm-version: ${{ inputs.graalvm-version }}
@@ -97,17 +89,9 @@ jobs:
         id: git-checkout
         uses: actions/checkout@v4
 
-      - name: Git Checkout shared workflows
-        id: git-checkout-shared-workflows
-        uses: actions/checkout@v4
-        with:
-          path: shared-github-workflows
-          ref: main
-          repository: turing85/shared-github-workflows
-
       - name: Build and Test
         id: build-and-test
-        uses: ./shared-github-workflows/.github/actions/java/maven/quarkus/single-module/build-and-test-native
+        uses: turing85/shared-github-workflows/.github/actions/java/maven/quarkus/single-module/build-and-test-native@main
         with:
           graalvm-distribution: ${{ inputs.graalvm-distribution }}
           graalvm-version: ${{ inputs.graalvm-version }}

@@ -67,7 +67,7 @@ runs:
   steps:
     - name: Build and Test
       id: build-and-test
-      uses: ./shared-github-workflows/.github/actions/java/maven/build
+      uses: turing85/shared-github-workflows/.github/actions/java/maven/build@main
       with:
         graalvm-distribution: ${{ inputs.graalvm-distribution }}
         graalvm-version: ${{ inputs.graalvm-version }}
