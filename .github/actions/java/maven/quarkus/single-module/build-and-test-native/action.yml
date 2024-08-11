@@ -6,49 +6,49 @@ inputs:
   graalvm-distribution:
     description: The GraalVM Distribution to use.
     default: mandrel
-    required: true
+    required: false
   graalvm-version:
     description: The GraalVM Distribution version to use.
     default: mandrel-23.1.2.0-Final
-    required: true
+    required: false
   java-version:
     description: The Java version of the GraalVM Distribution.
     default: '21'
-    required: true
+    required: false
 
   maven-opts:
     description: Options passed to the maven command.
     default: >-
       --batch-mode
       --color always
-    required: true
+    required: false
   maven-targets:
     description: The maven targets (goals and/or phases) to execute.
     default: verify
-    required: true
+    required: false
 
   artifact-retention-days:
     description: Duration in days after which the artifacts will expire.
     default: '2'
-    required: true
+    required: false
   executable-artifact-name:
     description: The name for the artifact holding the executable.
     default: executable
-    required: true
+    required: false
   executable-artifact-path:
     description: The path to the executable and related files (if any).
     default: |-
       target/*-runner
       target/*.so
-    required: true
+    required: false
   test-report-artifact-name:
     description: The name for the artifact holding the test report.
     default: test-report-native
-    required: true
+    required: false
   test-report-artifact-path:
     description: The path to the test report.
     default: '**/target/**/TEST*.xml'
-    required: true
+    required: false
 
 runs:
   using: composite

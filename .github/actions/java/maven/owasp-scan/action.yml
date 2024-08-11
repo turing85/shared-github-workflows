@@ -6,15 +6,15 @@ inputs:
   graalvm-distribution:
     description: The distribution of GraalVM to use.
     default: mandrel
-    required: true
+    required: false
   graalvm-version:
     description: The version of the GraalVM distribution to use.
     default: 23.1.2.0-Final
-    required: true
+    required: false
   java-version:
     description: The Java version to use.
     default: '21'
-    required: true
+    required: false
 
   maven-opts:
     description: Options passed to the maven command.
@@ -24,11 +24,11 @@ inputs:
       --define failBuildOnCVSS=0
       --define format=junit
       --define odc.outputDirectory=\${project.build.directory}/owasp
-    required: true
+    required: false
   maven-targets:
     description: The maven targets (goals and/or phases) to execute.
     default: org.owasp:dependency-check-maven:check
-    required: true
+    required: false
 
   download-artifacts:
     description: Whether artifacts (Maven state, compiled classes and JARs) should be downloaded.
@@ -39,7 +39,7 @@ inputs:
       The name for the artifact holding all compiled classes.
       Set to '' (empty string) to unset.
     default: compiled-classes
-    required: true
+    required: false
   compiled-classes-artifact-pattern:
     description: |
       The pattern for the artifact holding all compiled classes.
@@ -48,13 +48,13 @@ inputs:
   compiled-classes-artifact-merge-multiple:
     description: Whether multiple compiled classes artifacts should be merged.
     default: 'true'
-    required: true
+    required: false
   maven-state-artifact-name:
     description: |
       The name for the artifact holding the maven state(s).
       Set to '' (empty string) to unset.
     default: maven-state
-    required: true
+    required: false
   maven-state-artifact-pattern:
     description: |
       The pattern for the artifact holding the maven state(s).
@@ -63,20 +63,20 @@ inputs:
   maven-state-artifact-merge-multiple:
     description: Whether multiple maven state artifacts should be merged.
     default: 'true'
-    required: true
+    required: false
 
   artifact-retention-days:
     description: Duration in days after which the artifacts will expire.
     default: '2'
-    required: true
+    required: false
   owasp-report-artifact-name:
     description: The name for the artifact holding the OWASP report.
     default: owasp-report
-    required: true
+    required: false
   owasp-report-artifact-path:
     description: The path to the OWASP report.
     default: '**/target/owasp/*.xml'
-    required: true
+    required: false
 
   nvd-api-key:
     description: The API key for the NVD database, used by the dependency-check scan plugin.
@@ -85,7 +85,7 @@ inputs:
   comment-enabled:
     description: Whether a comment on the corresponding PR (if any) should be posted.
     default: 'true'
-    required: true
+    required: false
 
 runs:
   using: composite

@@ -15,7 +15,7 @@ a|
 graalvm-distribution
 ----
 | The distribution of GraalVM to use.
-| ✅
+| ❌
 a|
 ----
 mandrel
@@ -26,7 +26,7 @@ a|
 graalvm-version
 ----
 | The version of the GraalVM distribution to use.
-| ✅
+| ❌
 a|
 ----
 23.1.2.0-Final
@@ -37,7 +37,7 @@ a|
 java-version
 ----
 | The Java version to use.
-| ✅
+| ❌
 a|
 ----
 '21'
@@ -50,7 +50,7 @@ a|
 maven-opts
 ----
 | Options passed to the maven command.
-| ✅
+| ❌
 a|
 ----
 --batch-mode
@@ -62,7 +62,7 @@ a|
 maven-targets
 ----
 | The maven targets (goals and/or phases) to execute.
-| ✅
+| ❌
 a|
 ----
 verify

@@ -15,7 +15,7 @@ a|
 graalvm-distribution
 ----
 | The distribution of GraalVM to use.
-| ✅
+| ❌
 a|
 ----
 mandrel
@@ -26,7 +26,7 @@ a|
 graalvm-version
 ----
 | The version of the GraalVM distribution to use.
-| ✅
+| ❌
 a|
 ----
 23.1.2.0-Final
@@ -37,7 +37,7 @@ a|
 java-version
 ----
 | The Java version to use.
-| ✅
+| ❌
 a|
 ----
 '21'
@@ -50,7 +50,7 @@ a|
 maven-opts
 ----
 | Options passed to the maven command.
-| ✅
+| ❌
 a|
 ----
 --batch-mode
@@ -64,7 +64,7 @@ a|
 maven-targets
 ----
 | The maven targets (goals and/or phases) to execute.
-| ✅
+| ❌
 a|
 ----
 compile
@@ -80,7 +80,7 @@ a|
 download-artifacts
 ----
 | Whether artifacts (Maven state, compiled classes and JARs) should be downloaded.
-| ✅
+| ❌
 a|
 ----
 'true'
@@ -93,7 +93,7 @@ compiled-classes-artifact-name
 a| The pattern for the artifact holding all compiled classes.
 
 Set to `''` (empty string) to unset.
-| ✅
+| ❌
 a|
 ----
 compiled-classes
@@ -106,7 +106,7 @@ compiled-classes-artifact-pattern
 a| The pattern for the artifact holding all compiled classes.
 
 Will be ignored when `compiled-classes-artifact-name` is set.
-| ✅
+| ❌
 a|
 ----
 compiled-classes
@@ -117,7 +117,7 @@ a|
 compiled-classes-artifact-merge-multiple
 ----
 | Whether multiple compiled classes artifacts should be merged.
-| ✅
+| ❌
 a|
 ----
 'true'
@@ -130,7 +130,7 @@ maven-state-artifact-name
 a| The name for the artifact holding the maven state(s).
 
 Set to `''` (empty string) to unset.
-| ✅
+| ❌
 a|
 ----
 maven-state
@@ -143,7 +143,7 @@ maven-state-artifact-pattern
 a| The pattern for the artifact holding the maven state(s).
 
 Will be ignored when `maven-state-artifact-name` is set.
-| ✅
+| ❌
 a|
 ----
 maven-state
@@ -154,7 +154,7 @@ a|
 maven-state-artifact-merge-multiple
 ----
 | Whether multiple maven state artifacts should be merged.
-| ✅
+| ❌
 a|
 ----
 'true'
@@ -167,7 +167,7 @@ a|
 artifact-retention-days
 ----
 | Duration in days after which the artifacts will expire.
-| ✅
+| ❌
 a|
 ----
 '2'
@@ -178,7 +178,7 @@ a|
 owasp-report-artifact-name
 ----
 | The name for the artifact holding the OWASP report.
-| ✅
+| ❌
 a|
 ----
 owasp-report
@@ -189,7 +189,7 @@ a|
 owasp-report-artifact-path
 ----
 | The path to the OWASP report.
-| ✅
+| ❌
 a|
 ----
 '**/target/owasp/*.xml'
@@ -212,7 +212,7 @@ a|
 comment-enabled
 ----
 |Whether a comment on the corresponding PR (if any) should be posted.
-| ✅
+| ❌
 a|
 ----
 'true'

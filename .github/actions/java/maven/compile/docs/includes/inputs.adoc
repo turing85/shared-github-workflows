@@ -15,7 +15,7 @@ a|
 graalvm-distribution
 ----
 | The GraalVM distribution to use.
-| ✅
+| ❌
 a|
 ----
 mandrel
@@ -26,7 +26,7 @@ a|
 graalvm-version
 ----
 | The GraalVM distribution version to use.
-| ✅
+| ❌
 a|
 ----
 mandrel-23.1.2.0-Final
@@ -37,7 +37,7 @@ a|
 java-version
 ----
 | The Java version of the GraalVM distribution.
-| ✅
+| ❌
 a|
 ----
 '21'
@@ -50,7 +50,7 @@ a|
 maven-opts
 ----
 | Options passed to the maven command.
-| ✅
+| ❌
 a|
 ----
 --batch-mode
@@ -66,7 +66,7 @@ a|
 artifact-retention-days
 ----
 | Duration in days after which the artifacts will expire.
-| ✅
+| ❌
 a|
 ----
 '2'
@@ -77,7 +77,7 @@ a|
 compiled-classes-artifact-name
 ----
 | The name for the artifact holding all compiled classes.
-| ✅
+| ❌
 a|
 ----
 compiled-classes
@@ -88,7 +88,7 @@ a|
 maven-state-artifact-name
 ----
 | The name for the artifact holding the maven state.
-| ✅
+| ❌
 a|
 ----
 maven-state

@@ -6,26 +6,26 @@ inputs:
   graalvm-distribution:
     description: The GraalVM distribution to use.
     default: mandrel
-    required: true
+    required: false
   graalvm-version:
     description: The GraalVM distribution version to use.
     default: mandrel-23.1.2.0-Final
-    required: true
+    required: false
   java-version:
     description: The Java version of the GraalVM distribution.
     default: '21'
-    required: true
+    required: false
 
   maven-opts:
     description: Options passed to the maven command.
     default: >-
       --batch-mode
       --color always
-    required: true
+    required: false
   maven-targets:
     description: The maven targets (goals and/or phases) to execute.
     default: verify
-    required: true
+    required: false
 
 runs:
   using: composite
