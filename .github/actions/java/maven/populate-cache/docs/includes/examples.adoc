@@ -1,7 +1,11 @@
-ifndef::prefix[:prefix: ../../../../../../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../../../../../..
+endif::[]
+
 = Examples
 
-For example usages, please take a look at:
+For an example usage, please take a look at:
 
-* link:{prefix}/.github/workflows/maven-owasp-scan.yml[`.github/workflows/maven-owasp-scan.yml`], and
-* link:{prefix}/.github/workflows/maven-quarkus-single-module-build.yml[`.github/workflows/maven-quarkus-single-module-build.yml`]
+* link:{rootdir}/.github/workflows/maven-populate-cache.yml[`.github/workflows/maven-populate-cache.yml`]

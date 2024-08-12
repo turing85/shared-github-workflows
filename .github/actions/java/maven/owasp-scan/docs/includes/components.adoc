@@ -1,4 +1,9 @@
-ifndef::prefix[:prefix: ../../../../../../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../../../../../..
+endif::[]
+
 = Components
 
 This action is a composite action, it uses the following actions.
@@ -7,13 +12,13 @@ This action is a composite action, it uses the following actions.
 |===
 ^| Action
 ^| **direct**
-^|link:https://github.com/actions/cache[`actions/cache@v4`]
-^|link:https://github.com/actions/cache/tree/main/save[`actions/cache/save@v4`]
-^|link:https://github.com/actions/download-artifact[`actions/download-artifact@v4`]
-^|link:https://github.com/actions/upload-artifact[`actions/upload-artifact@v4`]
-^|link:https://github.com/turing85/publish-report[`turing85/publish-report@v2`]
-^|link:{prefix}/.github/actions/java/maven/build/action.yml[`.github/actions/java/maven/build/action.yml`]
+^|https://github.com/actions/cache[`actions/cache@v4`]
+^|https://github.com/actions/cache/tree/main/save[`actions/cache/save@v4`]
+^|https://github.com/actions/download-artifact[`actions/download-artifact@v4`]
+^|https://github.com/actions/upload-artifact[`actions/upload-artifact@v4`]
+^|https://github.com/turing85/publish-report[`turing85/publish-report@v2`]
+^|link:{rootdir}/.github/actions/java/maven/build/action.yml[`.github/actions/java/maven/build/action.yml`]
 
 ^| **indirect**
-^|link:https://github.com/graalvm/setup-graalvm[`graalvm/setup-graalvm@v1`]
+^|https://github.com/graalvm/setup-graalvm[`graalvm/setup-graalvm@v1`]
 |===

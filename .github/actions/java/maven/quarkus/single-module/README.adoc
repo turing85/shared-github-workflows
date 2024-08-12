@@ -1,5 +1,10 @@
-ifndef::prefix[:prefix: ../../../../../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:offset: leveloffset=+1
+:rootdir: ../../../../../..
+endif::[]
 
-include::build-and-test-jvm/README.adoc[]
+include::build-and-test-jvm/README.adoc[{offset}]
 
-include::build-and-test-native/README.adoc[]
+include::build-and-test-native/README.adoc[{offset}]

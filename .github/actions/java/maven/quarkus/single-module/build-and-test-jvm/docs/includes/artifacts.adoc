@@ -1,4 +1,9 @@
-ifndef::prefix[:prefix: ../../../../../../../../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../../../../../../../..
+endif::[]
+
 = Artifact
 
 The following artifacts are uploaded.

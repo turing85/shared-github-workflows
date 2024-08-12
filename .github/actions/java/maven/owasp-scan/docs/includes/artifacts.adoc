@@ -1,4 +1,9 @@
-ifndef::prefix[:prefix: ../../../../../../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../../../../../..
+endif::[]
+
 = Artifacts
 
 The following artifacts are downloaded if artifact download is enable (`${{ inputs.download-artifaces }}` is set to `'true'`).

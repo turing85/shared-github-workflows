@@ -1,8 +1,14 @@
-ifndef::prefix[:prefix: ../../../../../../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../../../../../..
+endif::[]
+
 = Examples
 
 For example usages, please see:
 
-* link:{prefix}/.github/actions/java/maven/quarkus/single-module/build-and-test-jvm/action.yml[`.github/actions/java/maven/quarkus/single-module/build-and-test-jvm/action.yml`],
-* link:{prefix}/.github/actions/java/maven/quarkus/single-module/build-and-test-native/action.yml[`.github/actions/java/maven/quarkus/single-module/build-and-test-native/action.yml`], and
-* link:{prefix}/.github/actions/java/maven/owasp-scan/action.yml[`.github/actions/java/maven/owasp-scan/action.yml`]
+* link:{rootdir}/.github/actions/java/maven/compile/action.yml[`.github/actions/java/maven/compile/action.yml`]
+* link:{rootdir}/.github/actions/java/maven/quarkus/single-module/build-and-test-jvm/action.yml[`.github/actions/java/maven/quarkus/single-module/build-and-test-jvm/action.yml`],
+* link:{rootdir}/.github/actions/java/maven/quarkus/single-module/build-and-test-native/action.yml[`.github/actions/java/maven/quarkus/single-module/build-and-test-native/action.yml`], and
+* link:{rootdir}/.github/actions/java/maven/owasp-scan/action.yml[`.github/actions/java/maven/owasp-scan/action.yml`]

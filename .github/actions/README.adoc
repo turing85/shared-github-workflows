@@ -1,4 +1,9 @@
-ifndef::prefix[:prefix: ../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../..
+endif::[]
+
 = Actions
 
 The following actions are provided.

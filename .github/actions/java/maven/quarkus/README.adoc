@@ -1,2 +1,7 @@
-ifndef::prefix[:prefix: ../../../../..]
-include::single-module/README.adoc[]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:offset: leveloffset=+1
+:rootdir: ../../../../..
+endif::[]
+include::single-module/README.adoc[{offset}]

@@ -1,4 +1,9 @@
-ifndef::prefix[:prefix: ../../../../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../../../..
+endif::[]
+
 = OWASP Scan
 
 This action can be used to run an OWASP scan and generate an OWASP artifact.
@@ -30,13 +35,13 @@ $ ./mvnw \
 == NVD API Key
 
 The action requires that a NVD API key is configured.
-The maven execution of the link:https://jeremylong.github.io/DependencyCheck/dependency-check-maven/[`dependency-check-maven` plugin] is preconfigured to use the NVD API Key.
+The maven execution of the https://jeremylong.github.io/DependencyCheck/dependency-check-maven/[`dependency-check-maven` plugin] is preconfigured to use the NVD API Key.
 
 == OWASP Cache
 
 The action sets up a global OWASP database cache.
 The cache is named `owasp-db` and is used to store the OWASP database.
-The cache is bound to the directory `owasp-db`, and the maven execution is preconfigured such that the link:https://jeremylong.github.io/DependencyCheck/dependency-check-maven/[`dependency-check-maven` plugin] reads and writes to this directory.
+The cache is bound to the directory `owasp-db`, and the maven execution is preconfigured such that the https://jeremylong.github.io/DependencyCheck/dependency-check-maven/[`dependency-check-maven` plugin] reads and writes to this directory.
 
 == Publishing report
 All files matching the pattern `${{ inputs.owasp-report-artifact-path }}` are automatically published as report.

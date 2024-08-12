@@ -1,4 +1,9 @@
-ifndef::prefix[:prefix: ../../../../../../..]
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../../../../../..
+endif::[]
+
 = Components
 
 This action is a composite action, it uses the following actions.
@@ -7,5 +12,5 @@ This action is a composite action, it uses the following actions.
 |===
 ^| Action
 ^| **direct**
-^|link:https://github.com/graalvm/setup-graalvm[`graalvm/setup-graalvm@v1`]
+^|https://github.com/graalvm/setup-graalvm[`graalvm/setup-graalvm@v1`]
 |===

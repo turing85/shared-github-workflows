@@ -1,5 +1,10 @@
-ifndef::prefix[:prefix: ../../../../../../..]
-= Quarkus - Single Module - Build and test (JVM)
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../../../../../..
+endif::[]
+
+= Quarkus - Single Module - Build and Test (JVM)
 
 This action can be used to build and test a single-module quarkus application with maven.
 
