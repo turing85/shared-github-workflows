@@ -54,8 +54,8 @@ runs:
 
     - name: Upload Maven State
       id: upload-maven-state
-      uses: actions/upload-artifact@v4
       if: ${{ always() }}
+      uses: actions/upload-artifact@v4
       with:
         if-no-files-found: error
         name: ${{ inputs.maven-state-artifact-name }}
@@ -64,8 +64,8 @@ runs:
 
     - name: Upload Compiled Classes
       id: upload-compiled-classes
-      uses: actions/upload-artifact@v4
       if: ${{ always() }}
+      uses: actions/upload-artifact@v4
       with:
         if-no-files-found: error
         name: ${{ inputs.compiled-classes-artifact-name }}

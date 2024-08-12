@@ -67,8 +67,8 @@ runs:
 
     - name: Upload executable
       id: upload-executable
-      uses: actions/upload-artifact@v4
       if: ${{ always() }}
+      uses: actions/upload-artifact@v4
       with:
         if-no-files-found: error
         name: ${{ inputs.executable-artifact-name }}
@@ -77,8 +77,8 @@ runs:
 
     - name: Upload Test Report
       id: upload-test-report
-      uses: actions/upload-artifact@v4
       if: ${{ always() }}
+      uses: actions/upload-artifact@v4
       with:
         if-no-files-found: error
         name: ${{ inputs.test-report-artifact-name }}

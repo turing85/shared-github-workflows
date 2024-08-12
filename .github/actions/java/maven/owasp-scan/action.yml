@@ -78,14 +78,14 @@ inputs:
     default: '**/target/owasp/*.xml'
     required: false
 
-  nvd-api-key:
-    description: The API key for the NVD database, used by the dependency-check scan plugin.
-    required: true
-
   comment-enabled:
     description: Whether a comment on the corresponding PR (if any) should be posted.
     default: 'true'
     required: false
+
+  nvd-api-key:
+    description: The API key for the NVD database, used by the dependency-check scan plugin.
+    required: true
 
 runs:
   using: composite
@@ -100,8 +100,8 @@ runs:
 
     - name: Download Maven State
       id: download-maven-state
-      uses: actions/download-artifact@v4
       if: ${{ inputs.download-artifacts == 'true' }}
+      uses: actions/download-artifact@v4
       with:
         merge-multiple: ${{ inputs.maven-state-merge-multiple == 'true' }}
         name: ${{ inputs.maven-state-artifact-name }}
@@ -109,8 +109,8 @@ runs:
 
     - name: Download Compiled Classes
       id: download-compiled-classes
-      uses: actions/download-artifact@v4
       if: ${{ inputs.download-artifacts == 'true' }}
+      uses: actions/download-artifact@v4
       with:
         merge-multiple: ${{ inputs.compiled-classes-merge-multiple == 'true' }}
         name: ${{ inputs.compiled-classes-artifact-name }}
@@ -128,16 +128,16 @@ runs:
 
     - name: Upload OWASP DB Cache
       id: upload-owasp-db-cache
-      uses: actions/cache/save@v4
       if: ${{ steps.download-owasp-db-cache.outputs.cache-hit != 'true' }}
+      uses: actions/cache/save@v4
       with:
         key: owasp-db
         path: owasp-db
 
     - name: Upload OWASP Scan Report
       id: upload-owasp-scan-report
-      uses: actions/upload-artifact@v4
       if: ${{ always() }}
+      uses: actions/upload-artifact@v4
       with:
         if-no-files-found: error
         name: ${{ inputs.owasp-report-artifact-name }}

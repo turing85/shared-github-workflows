@@ -41,7 +41,9 @@ runs:
 
     - name: Populate Cache
       id: populate-cache
+
       if: ${{ steps.setup.outputs.cache-hit != 'true' }}
+
       shell: sh
       run: |
         ./mvnw \

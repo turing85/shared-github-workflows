@@ -195,16 +195,6 @@ a|
 '**/target/owasp/*.xml'
 ----
 
-4+^| **OWASP Scan configuration**
-
-a|
-----
-nvd-api-key
-----
-| The API key for the NVD database, used by the dependency-check scan plugin.
-| ✅
-|
-
 4+^| **PR commenting**
 
 a|
@@ -218,5 +208,13 @@ a|
 'true'
 ----
 
+4+^| **OWASP Scan configuration**
 
+a|
+----
+nvd-api-key
+----
+| The API key for the NVD database, used by the dependency-check scan plugin.
+| ✅
+|
 |===
