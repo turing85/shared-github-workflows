@@ -116,8 +116,8 @@ runs:
         name: ${{ inputs.compiled-classes-artifact-name }}
         pattern: ${{ inputs.compiled-classes-artifact-pattern }}
 
-    - name: OWASP CVE Scan
-      id: owasp-cve-scan
+    - name: OWASP Scan
+      id: owasp-scan
       uses: turing85/shared-github-workflows/.github/actions/java/maven/build@main
       with:
         maven-opts: >-
