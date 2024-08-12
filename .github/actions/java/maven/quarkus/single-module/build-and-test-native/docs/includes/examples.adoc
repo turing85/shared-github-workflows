@@ -1,3 +1,4 @@
+ifndef::prefix[:prefix: ../../../../../../../../..]
 = Examples
 
 For example usages, please take a look at:
