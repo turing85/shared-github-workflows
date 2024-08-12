@@ -19,6 +19,11 @@ on:
         required: false
         type: string
 
+      comment-enabled:
+        description: Whether a comment on the corresponding PR (if any) should be posted
+        default: true
+        required: false
+        type: boolean
     secrets:
       nvd-api-key:
         description: The API Key used for Dependency Analysis.
@@ -64,5 +69,6 @@ jobs:
         --define ci-owasp
       maven-targets: org.owasp:dependency-check-maven:check
 
+      comment-enabled: ${{ inputs.comment-enabled }}
     secrets:
       nvd-api-key: ${{ secrets.nvd-api-key }}

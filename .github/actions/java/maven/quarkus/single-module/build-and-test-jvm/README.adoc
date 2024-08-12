@@ -3,6 +3,8 @@ ifndef::prefix[:prefix: ../../../../../../..]
 
 This action can be used to build and test a single-module quarkus application with maven.
 
+If requested, a comment is posted to a related Pull Request.
+
 include::docs/includes/components.adoc[leveloffset=+1]
 
 == Prerequisites

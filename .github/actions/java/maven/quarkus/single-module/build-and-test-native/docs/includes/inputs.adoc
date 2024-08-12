@@ -128,4 +128,16 @@ a|
 '**/target/**/TEST*.xml'
 ----
 
+4+^| **PR commenting**
+
+a|
+----
+comment-enabled
+----
+| Whether a comment on the corresponding PR (if any) should be posted.
+| ❌
+a|
+----
+'true'
+----
 |===

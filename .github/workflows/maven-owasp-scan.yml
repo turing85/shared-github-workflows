@@ -41,7 +41,6 @@ on:
         default: true
         required: false
         type: boolean
-
     secrets:
       nvd-api-key:
         description: The API Key used for Dependency Analysis.

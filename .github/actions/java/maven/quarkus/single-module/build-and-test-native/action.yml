@@ -50,6 +50,11 @@ inputs:
     default: '**/target/**/TEST*.xml'
     required: false
 
+  comment-enabled:
+    description: Whether a comment on the corresponding PR (if any) should be posted
+    default: 'true'
+    required: false
+
 runs:
   using: composite
 
@@ -84,3 +89,14 @@ runs:
         name: ${{ inputs.test-report-artifact-name }}
         path: ${{ inputs.test-report-artifact-path }}
         retention-days: 2
+
+    - name: Publish report (Native Test)
+      id: publish-report-native-test
+      if: ${{ always() }}
+      uses: turing85/publish-report@v2
+      with:
+        cancel-workflow-on-error: true
+        comment-enabled: ${{ inputs.comment-enabled }}
+        report-name: JVM Test
+        report-only-summary: true
+        report-path: '**/target/**/TEST*.xml'

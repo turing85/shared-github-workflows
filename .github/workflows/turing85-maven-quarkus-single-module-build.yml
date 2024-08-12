@@ -18,7 +18,6 @@ on:
         default: 21
         required: false
         type: string
-
     secrets:
       nvd-api-key:
         description: The API Key used for Dependency Analysis.
@@ -77,6 +76,8 @@ jobs:
       maven-targets-jvm: verify
       maven-targets-native: verify
 
+      comment-enabled: true
+
   owasp-scan:
     name: OWASP Scan
 
@@ -96,5 +97,6 @@ jobs:
         --define ci-owasp
       maven-targets: org.owasp:dependency-check-maven:check
 
+      comment-enabled: true
     secrets:
       nvd-api-key: ${{ secrets.nvd-api-key }}
