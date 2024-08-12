@@ -32,10 +32,6 @@ on:
         required: false
         type: string
 
-permissions:
-  actions: write
-  checks: write
-
 jobs:
   populate-cache:
     name: Populate Cache
