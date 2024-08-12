@@ -1,4 +1,4 @@
-name: Nightly CVE Scan
+name: OWASP Scan
 
 on:
   workflow_call:
@@ -52,8 +52,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  owasp-scan:
-    name: OWASP Scan
+  scan:
+    name: Scan
     runs-on: ubuntu-latest
 
     steps:

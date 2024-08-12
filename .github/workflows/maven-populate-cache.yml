@@ -1,4 +1,4 @@
-name: Nightly CVE Scan
+name: Populate Cache
 
 on:
   workflow_call:
@@ -33,8 +33,8 @@ on:
         type: string
 
 jobs:
-  populate-cache:
-    name: Populate Cache
+  populate:
+    name: Populate
     runs-on: ubuntu-latest
 
     steps:

@@ -1,0 +1,68 @@
+name: OWASP Scan
+
+on:
+  workflow_call:
+    inputs:
+      graalvm-distribution:
+        description: The GraalVM Distribution to use
+        default: mandrel
+        required: false
+        type: string
+      graalvm-version:
+        description: the GraalVM Distribution version to use
+        default: mandrel-23.1.2.0-Final
+        required: false
+        type: string
+      java-version:
+        description: The Java version of the GraalVM Distribution
+        default: 21
+        required: false
+        type: string
+
+    secrets:
+      nvd-api-key:
+        description: The API Key used for Dependency Analysis.
+        required: true
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs:
+  populate-cache:
+    name: Populate Cache
+    uses: turing85/shared-github-workflows/.github/workflows/maven-populate-cache.yml@main
+    with:
+      graalvm-distribution: ${{ inputs.graalvm-distribution }}
+      graalvm-version: ${{ inputs.graalvm-version }}
+      java-version: ${{ inputs.java-version }}
+
+      maven-opts: >-
+        --batch-mode
+        --color always
+        --define ci-populate-cache
+      maven-targets: >-
+        verify
+        quarkus:go-offline
+        de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
+
+  owasp-scan:
+    name: OWASP Scan
+
+    needs:
+      - populate-cache
+
+    uses: turing85/shared-github-workflows/.github/workflows/maven-owasp-scan.yml@main
+    with:
+      graalvm-distribution: ${{ inputs.graalvm-distribution }}
+      graalvm-version: ${{ inputs.graalvm-version }}
+      java-version: ${{ inputs.java-version }}
+
+      maven-opts: >-
+        --batch-mode
+        --color always
+        --define ci-owasp
+      maven-targets: org.owasp:dependency-check-maven:check
+
+    secrets:
+      nvd-api-key: ${{ secrets.nvd-api-key }}

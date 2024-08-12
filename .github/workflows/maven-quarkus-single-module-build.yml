@@ -1,4 +1,4 @@
-name: Build
+name: Quarkus Build
 
 on:
   workflow_call:

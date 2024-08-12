@@ -7,8 +7,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  recreate-comment:
-    name: Recreate Comment
+  recreate:
+    name: Recreate
     runs-on: ubuntu-latest
 
     steps:
