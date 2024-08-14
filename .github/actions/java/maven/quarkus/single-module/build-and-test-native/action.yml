@@ -97,6 +97,6 @@ runs:
       with:
         cancel-workflow-on-error: true
         comment-enabled: ${{ inputs.comment-enabled }}
-        report-name: JVM Test
+        report-name: Native Test
         report-only-summary: true
         report-path: '**/target/**/TEST*.xml'
