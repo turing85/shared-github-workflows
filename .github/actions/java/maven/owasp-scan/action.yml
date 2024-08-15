@@ -128,7 +128,7 @@ runs:
 
     - name: Upload OWASP DB Cache
       id: upload-owasp-db-cache
-      if: ${{ steps.download-owasp-db-cache.outputs.cache-hit != 'true' }}
+      if: ${{ (failure() || success()) && steps.download-owasp-db-cache.outputs.cache-hit != 'true' }}
       uses: actions/cache/save@v4
       with:
         key: owasp-db
