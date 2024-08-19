@@ -1,9 +1,8 @@
 ifndef::rootdir[]
-:toc:
-:toclevels: 4
 :rootdir: ../../../../../../../../..
 endif::[]
 
+[discrete]
 = Examples
 
 For an example usage, please take a look at:

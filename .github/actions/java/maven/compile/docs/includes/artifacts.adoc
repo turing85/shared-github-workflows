@@ -1,10 +1,9 @@
 ifndef::rootdir[]
-:toc:
-:toclevels: 4
 :rootdir: ../../../../../../..
 endif::[]
 
-= Artifact
+[discrete]
+= Artifacts
 
 The following artifacts are uploaded.
 

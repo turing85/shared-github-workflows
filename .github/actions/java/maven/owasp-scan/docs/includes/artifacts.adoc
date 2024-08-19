@@ -1,9 +1,8 @@
 ifndef::rootdir[]
-:toc:
-:toclevels: 4
 :rootdir: ../../../../../../..
 endif::[]
 
+[discrete]
 = Artifacts
 
 The following artifacts are downloaded if artifact download is enable (`${{ inputs.download-artifaces }}` is set to `'true'`).

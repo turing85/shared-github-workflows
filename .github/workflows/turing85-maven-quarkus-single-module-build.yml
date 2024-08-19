@@ -9,7 +9,7 @@ on:
         required: false
         type: string
       graalvm-version:
-        description: the GraalVM Distribution version to use
+        description: The GraalVM Distribution version to use
         default: mandrel-23.1.2.0-Final
         required: false
         type: string

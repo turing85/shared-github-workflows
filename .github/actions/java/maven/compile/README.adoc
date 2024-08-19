@@ -10,10 +10,12 @@ This action can be used to build an application with maven.
 
 include::docs/includes/components.adoc[leveloffset=+1]
 
+[discrete]
 == Prerequisites
 
 include::../docs/includes/prereq-maven-wrapper.adoc[]
 
+[discrete]
 == What it does
 
 The action clones the repository and sets up the GraalVM version defined.

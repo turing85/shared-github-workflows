@@ -1,9 +1,8 @@
 ifndef::rootdir[]
-:toc:
-:toclevels: 4
 :rootdir: ../../../../../../..
 endif::[]
 
+[discrete]
 = Components
 
 This action is a composite action, it uses the following actions.
