@@ -1,0 +1,46 @@
+ifndef::rootdir[]
+:rootdir: ../../../../../../..
+endif::[]
+
+[discrete]
+= Inputs
+
+[cols=4*,options=header]
+|===
+| name
+| description
+| Required?
+| default value
+
+4+^| **Git configuration**
+
+a|
+----
+branch-name
+----
+| The branch to clean up.
+| ❌
+a|
+----
+${{ github.ref }}
+----
+
+a|
+----
+github-token
+----
+| The token used to access the repository.
+| ✅
+|
+
+a|
+----
+repo-url
+----
+| The URL to the repository.
+| ❌
+a|
+----
+${{ github.repository }}
+----
+|===

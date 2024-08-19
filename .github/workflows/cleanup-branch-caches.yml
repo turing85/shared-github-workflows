@@ -1,0 +1,38 @@
+name: Cleanup branch caches
+
+on:
+  workflow_call:
+    inputs:
+      branch-name:
+        description: The branch to clean up.
+        default: ${{ github.ref }}
+        required: false
+        type: string
+      repo-url:
+        description: The URL to the repository.
+        default: ${{ github.repository }}
+        required: false
+        type: string
+    secrets:
+      github-token:
+        description: The token used to access the repository.
+        required: true
+
+permissions:
+  # `actions:write` permission is required to delete caches
+  #   See also: https://docs.github.com/en/rest/actions/cache?apiVersion=2022-11-28#delete-a-github-actions-cache-for-a-repository-using-a-cache-id
+  actions: write
+
+jobs:
+  delete:
+    name: Cleanup
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cleanup
+        id: cleanup
+        uses: turing85/shared-github-workflows/.github/actions/github/cleanup-branch-caches@main
+        with:
+          branch-name: ${{ inputs.branch-name }}
+          github-token: ${{ secrets.github-token }}
+          repo-url: ${{ inputs.repo-url }}

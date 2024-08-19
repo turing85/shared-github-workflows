@@ -1,0 +1,8 @@
+ifndef::rootdir[]
+:rootdir: ../../../../../../..
+endif::[]
+
+[discrete]
+= Artifacts
+
+None.

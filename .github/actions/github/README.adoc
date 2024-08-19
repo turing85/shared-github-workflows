@@ -1,0 +1,9 @@
+ifndef::rootdir[]
+:toc:
+:toclevels: 4
+:rootdir: ../../..
+endif::[]
+
+= Github
+
+include::cleanup-branch-caches/README.adoc[leveloffset=+1]

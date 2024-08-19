@@ -8,4 +8,6 @@ endif::[]
 
 The following actions are provided.
 
+include::github/README.adoc[leveloffset=+1]
+
 include::java/README.adoc[leveloffset=+1]

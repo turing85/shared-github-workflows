@@ -1,0 +1,8 @@
+ifndef::rootdir[]
+:rootdir: ../../../../../../..
+endif::[]
+
+[discrete]
+= Components
+
+This action runs a bash script. It does not depend on any other action.

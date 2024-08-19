@@ -1,0 +1,10 @@
+ifndef::rootdir[]
+:rootdir: ../../../../../../..
+endif::[]
+
+[discrete]
+= Examples
+
+For an example usage, please take a look at:
+
+* link:{rootdir}/.github/workflows/delete-branch-caches.yml[`.github/workflows/delete-branch-caches.yml`]
