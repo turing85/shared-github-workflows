@@ -13,10 +13,6 @@ If requested, a comment is posted to a related Pull Request.
 
 include::docs/includes/components.adoc[leveloffset=+1]
 
-== Prerequisites
-
-include::../../../docs/includes/prereq-maven-wrapper.adoc[]
-
 == What it does
 
 The action clones the repository and sets up the GraalVM version defined.

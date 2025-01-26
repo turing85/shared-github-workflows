@@ -10,12 +10,6 @@ This action can be used to run an OWASP scan and generate an OWASP artifact.
 
 include::docs/includes/components.adoc[leveloffset=+1]
 
-[discrete]
-== Prerequisites
-
-include::../docs/includes/prereq-maven-wrapper.adoc[]
-
-[discrete]
 == What it does
 
 The action clones the repository and sets up the GraalVM version defined.

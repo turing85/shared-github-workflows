@@ -6,6 +6,8 @@ endif::[]
 
 = Maven
 
+include::docs/includes/prereq.adoc[leveloffset=+1]
+
 include::build/README.adoc[leveloffset=+1]
 
 include::compile/README.adoc[leveloffset=+1]
