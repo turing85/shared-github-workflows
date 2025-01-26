@@ -19,6 +19,12 @@ on:
         required: false
         type: string
 
+      supports-native:
+        description: Whether this app supports native builds
+        default: true
+        required: false
+        type: boolean
+
       maven-opts-jvm:
         description: Options passed to the maven command for the JVM Build.
         default: >-
@@ -59,11 +65,9 @@ permissions:
   pull-requests: write
 
 jobs:
-
   build-and-test-jvm:
     name: Build and Test (JVM)
     runs-on: ubuntu-latest
-
     steps:
       - name: Git checkout
         id: git-checkout
@@ -83,7 +87,7 @@ jobs:
   build-and-test-native:
     name: Build and Test (Native)
     runs-on: ubuntu-latest
-
+    if: ${{ inputs.supports-native == true }}
     steps:
       - name: Git checkout
         id: git-checkout

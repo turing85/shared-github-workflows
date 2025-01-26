@@ -18,6 +18,12 @@ on:
         default: 21
         required: false
         type: string
+
+      supports-native:
+        description: Whether this app supports native builds
+        default: true
+        required: false
+        type: boolean
     secrets:
       nvd-api-key:
         description: The API Key used for Dependency Analysis.
@@ -59,6 +65,7 @@ jobs:
 
     uses: turing85/shared-github-workflows/.github/workflows/maven-quarkus-single-module-build.yml@main
     with:
+      supports-native: ${{ inputs.supports-native }}
       graalvm-distribution: ${{ inputs.graalvm-distribution }}
       graalvm-version: ${{ inputs.graalvm-version }}
       java-version: ${{ inputs.java-version }}
