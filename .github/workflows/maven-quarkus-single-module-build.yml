@@ -71,7 +71,7 @@ jobs:
     steps:
       - name: Git checkout
         id: git-checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build and Test
         id: build-and-test
@@ -91,7 +91,7 @@ jobs:
     steps:
       - name: Git checkout
         id: git-checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build and Test
         id: build-and-test
