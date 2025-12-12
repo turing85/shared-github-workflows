@@ -101,7 +101,7 @@ runs:
     - name: Download Maven State
       id: download-maven-state
       if: ${{ inputs.download-artifacts == 'true' }}
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         merge-multiple: ${{ inputs.maven-state-merge-multiple == 'true' }}
         name: ${{ inputs.maven-state-artifact-name }}
@@ -110,7 +110,7 @@ runs:
     - name: Download Compiled Classes
       id: download-compiled-classes
       if: ${{ inputs.download-artifacts == 'true' }}
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         merge-multiple: ${{ inputs.compiled-classes-merge-multiple == 'true' }}
         name: ${{ inputs.compiled-classes-artifact-name }}
@@ -137,7 +137,7 @@ runs:
     - name: Upload OWASP Scan Report
       id: upload-owasp-scan-report
       if: ${{ always() }}
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         if-no-files-found: error
         name: ${{ inputs.owasp-report-artifact-name }}
