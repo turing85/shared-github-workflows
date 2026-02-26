@@ -12,7 +12,7 @@ This action is a composite action, it uses the following actions.
 ^| Action
 
 ^| **direct**
-^|https://github.com/actions/upload-artifact[`actions/upload-artifact@v6`]
+^|https://github.com/actions/upload-artifact[`actions/upload-artifact@v7`]
 ^|https://github.com/turing85/publish-report[`turing85/publish-report@v2`]
 ^|link:{rootdir}/.github/actions/java/maven/build/action.yml[`.github/actions/java/maven/build/action.yml`]
 ^| **indirect**

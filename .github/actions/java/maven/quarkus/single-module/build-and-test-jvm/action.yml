@@ -85,7 +85,7 @@ runs:
     - name: Upload Maven State
       id: upload-maven-state
       if: ${{ always() }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         if-no-files-found: error
         name: ${{ inputs.maven-state-artifact-name }}
@@ -95,7 +95,7 @@ runs:
     - name: Upload Compiled Classes
       id: upload-compiled-classes
       if: ${{ always() }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         if-no-files-found: error
         name: ${{ inputs.compiled-classes-artifact-name }}
@@ -105,7 +105,7 @@ runs:
     - name: Upload JARs
       id: upload-jars
       if: ${{ always() }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         if-no-files-found: error
         name: ${{ inputs.jars-artifact-name }}
@@ -115,7 +115,7 @@ runs:
     - name: Upload Fast-JAR
       id: upload-fast-jar
       if: ${{ always() }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         if-no-files-found: error
         name: ${{ inputs.fast-jar-artifact-name }}
@@ -125,7 +125,7 @@ runs:
     - name: Upload Test Report
       id: upload-test-report
       if: ${{ always() }}
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         if-no-files-found: error
         name: ${{ inputs.test-report-artifact-name }}
