@@ -13,7 +13,7 @@ This action is a composite action, it uses the following actions.
 
 ^| **direct**
 ^|https://github.com/actions/upload-artifact[`actions/upload-artifact@v7`]
-^|https://github.com/turing85/publish-report[`turing85/publish-report@v2`]
+^|https://github.com/turing85/publish-report[`turing85/publish-report@v3`]
 ^|link:{rootdir}/.github/actions/java/maven/build/action.yml[`.github/actions/java/maven/build/action.yml`]
 ^| **indirect**
 ^|https://github.com/graalvm/setup-graalvm[`graalvm/setup-graalvm@v1`]

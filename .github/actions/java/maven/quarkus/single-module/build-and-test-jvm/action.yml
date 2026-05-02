@@ -135,9 +135,8 @@ runs:
     - name: Publish report (JVM Test)
       id: publish-report-jvm-test
       if: ${{ always() }}
-      uses: turing85/publish-report@v2
+      uses: turing85/publish-report@v3
       with:
-        cancel-workflow-on-error: true
         comment-enabled: ${{ inputs.comment-enabled }}
         report-name: JVM Test
         report-only-summary: true
