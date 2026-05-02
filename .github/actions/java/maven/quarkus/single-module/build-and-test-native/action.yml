@@ -93,9 +93,8 @@ runs:
     - name: Publish report (Native Test)
       id: publish-report-native-test
       if: ${{ always() }}
-      uses: turing85/publish-report@v2
+      uses: turing85/publish-report@v3
       with:
-        cancel-workflow-on-error: true
         comment-enabled: ${{ inputs.comment-enabled }}
         report-name: Native Test
         report-only-summary: true

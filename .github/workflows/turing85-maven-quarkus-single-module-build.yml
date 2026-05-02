@@ -30,7 +30,6 @@ on:
         required: true
 
 permissions:
-  actions: write
   checks: write
   pull-requests: write
 

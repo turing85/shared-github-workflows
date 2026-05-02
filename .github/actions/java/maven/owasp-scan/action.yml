@@ -147,7 +147,7 @@ runs:
     - name: Publish Report
       id: publish-report
       if: ${{ always() }}
-      uses: turing85/publish-report@v2
+      uses: turing85/publish-report@v3
       with:
         comment-enabled: ${{ inputs.comment-enabled }}
         report-list-tests: failed

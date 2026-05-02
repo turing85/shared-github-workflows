@@ -15,7 +15,7 @@ This action is a composite action, it uses the following actions.
 ^|https://github.com/actions/cache/tree/main/save[`actions/cache/save@v5`]
 ^|https://github.com/actions/download-artifact[`actions/download-artifact@v8`]
 ^|https://github.com/actions/upload-artifact[`actions/upload-artifact@v7`]
-^|https://github.com/turing85/publish-report[`turing85/publish-report@v2`]
+^|https://github.com/turing85/publish-report[`turing85/publish-report@v3`]
 ^|link:{rootdir}/.github/actions/java/maven/build/action.yml[`.github/actions/java/maven/build/action.yml`]
 
 ^| **indirect**
