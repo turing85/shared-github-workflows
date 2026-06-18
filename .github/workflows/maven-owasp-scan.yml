@@ -58,7 +58,7 @@ jobs:
     steps:
       - name: Git checkout
         id: git-checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: OWASP Scan
         id: owasp-scan
